@@ -6,6 +6,9 @@ const TO_NAME      = 'Barry English';
 const SENDER_EMAIL = 'info@doublemarvellous.com'; // must be a verified sender in Brevo
 const SENDER_NAME  = 'Freelance Ireland website';
 
+// Brevo contact list IDs (Contacts → Lists; the ID is shown next to each list).
+const LIST_IDS = { hire: 0, join: 0 }; // e.g. { hire: 7, join: 8 }
+
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), {
     status,
@@ -91,6 +94,25 @@ export default async (req) => {
   if (!res.ok) {
     console.error('Brevo send failed', res.status, await res.text());
     return json({ ok: false, error: 'Sorry, something went wrong. Please try again.' }, 502);
+  }
+
+  // Add/update the submitter as a Brevo contact. Never blocks the form if it fails.
+  if (LIST_IDS[type]) {
+    try {
+      const c = await fetch('https://api.brevo.com/v3/contacts', {
+        method: 'POST',
+        headers: { accept: 'application/json', 'content-type': 'application/json', 'api-key': apiKey },
+        body: JSON.stringify({
+          email,
+          attributes: { FIRSTNAME: name },
+          listIds: [LIST_IDS[type]],
+          updateEnabled: true,
+        }),
+      });
+      if (!c.ok) console.error('Brevo contact failed', c.status, await c.text());
+    } catch (err) {
+      console.error('Brevo contact error', err);
+    }
   }
 
   return json({ ok: true });

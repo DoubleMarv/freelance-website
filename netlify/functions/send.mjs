@@ -104,7 +104,10 @@ export default async (req) => {
         headers: { accept: 'application/json', 'content-type': 'application/json', 'api-key': apiKey },
         body: JSON.stringify({
           email,
-          attributes: { FIRSTNAME: name },
+          // Custom attributes must exist in Brevo first (Contacts → Settings → Attributes).
+          attributes: type === 'hire'
+            ? { FIRSTNAME: name, SERVICE: get('service'), BUDGET: get('budget'), DETAILS: details }
+            : { FIRSTNAME: name, SERVICE: get('service'), PORTFOLIO: get('portfolio'), DETAILS: details },
           listIds: [LIST_IDS[type]],
           updateEnabled: true,
         }),

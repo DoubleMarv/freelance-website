@@ -2,7 +2,7 @@
 (function () {
   // Set this to your own endpoint (e.g. Formspree, your API) to receive submissions as JSON.
   // Leave empty to just show the success message.
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = '/api/send';
 
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.request-selector [role="tab"]'));
   var panels = Array.prototype.slice.call(document.querySelectorAll('.hero-request-area [role="tabpanel"]'));

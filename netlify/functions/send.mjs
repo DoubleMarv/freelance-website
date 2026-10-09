@@ -7,7 +7,7 @@ const SENDER_EMAIL = 'info@doublemarvellous.com'; // must be a verified sender i
 const SENDER_NAME  = 'Freelance Ireland website';
 
 // Brevo contact list IDs (Contacts → Lists; the ID is shown next to each list).
-const LIST_IDS = { hire: 0, join: 0 }; // e.g. { hire: 7, join: 8 }
+const LIST_IDS = { hire: 5, join: 6 }; // e.g. { hire: 7, join: 8 }
 
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), {

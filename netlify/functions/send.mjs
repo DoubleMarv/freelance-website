@@ -24,14 +24,19 @@ export default async (req) => {
   const apiKey = process.env.brevage;
   if (!apiKey) return json({ ok: false, error: 'Mail is not configured' }, 500);
 
-  let form;
-  try { form = await req.formData(); } catch { return json({ ok: false, error: 'Bad request' }, 400); }
-  const get = (k) => String(form.get(k) ?? '').trim();
+  // Accepts JSON (from script.js) or form data.
+  let data;
+  try {
+    data = (req.headers.get('content-type') || '').includes('application/json')
+      ? await req.json()
+      : Object.fromEntries(await req.formData());
+  } catch { return json({ ok: false, error: 'Bad request' }, 400); }
+  const get = (k) => String(data?.[k] ?? '').trim();
 
   // Honeypot: bots fill the hidden "website" field. Pretend success.
   if (get('website')) return json({ ok: true });
 
-  const type = get('form_type') === 'join' ? 'join' : 'hire';
+  const type = (get('kind') || get('form_type')) === 'join' ? 'join' : 'hire';
   const name = get('name');
   const email = get('email');
   const details = get('details');

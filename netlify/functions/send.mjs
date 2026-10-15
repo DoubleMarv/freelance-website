@@ -53,7 +53,9 @@ export default async (req) => {
   let subject;
 
   if (type === 'hire') {
-    subject = `New project enquiry – ${name}`;
+    const location = get('location').slice(0, 60);
+    subject = `New project enquiry – ${name}` + (location ? ` (${location})` : '');
+    if (location) fields.Location = location;
     fields.Service = get('service');
     fields.Budget = get('budget');
     fields.Project = details;

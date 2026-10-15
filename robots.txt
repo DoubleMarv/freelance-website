@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://freelance-ireland.com/sitemap.xml

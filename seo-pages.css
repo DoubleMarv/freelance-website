@@ -1,0 +1,76 @@
+/* Freelance Ireland — service/county landing pages. Builds on styles.css. */
+
+.crumbs {
+  padding-top: 18px;
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.crumbs a { color: inherit; text-decoration: none; }
+.crumbs a:hover { color: var(--foreground); text-decoration: underline; }
+.crumbs span[aria-current] { color: var(--foreground); }
+
+.seo-hero { padding-bottom: 24px; }
+.hero-requests .seo-title {
+  font-size: 56px;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.seo-form {
+  border: 1px solid var(--border);
+  background: var(--background);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+/* Header/footer CTAs here are links, not buttons. */
+a.fi-button { text-decoration: none; }
+
+.link-block { padding-top: 0; }
+.link-block-title {
+  font-size: 22px;
+  font-weight: 650;
+  margin-bottom: 16px;
+}
+.link-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 8px;
+}
+.link-grid a {
+  display: block;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--foreground);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background .15s, border-color .15s;
+}
+.link-grid a:hover { background: var(--lime); border-color: var(--lime); }
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  padding-top: 18px;
+  font-size: 12px;
+}
+.footer-links a { color: var(--muted-foreground); text-decoration: none; }
+.footer-links a:hover { color: var(--foreground); text-decoration: underline; }
+
+@media (width <= 1100px) {
+  .hero-requests .seo-title { font-size: 46px; }
+}
+@media (width <= 700px) {
+  .hero-requests .seo-title { font-size: 34px; }
+  .seo-form { padding: 14px; }
+  .link-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* Landing-page service cards have no icon/button, so drop the tall min-height. */
+.service-item:not(:has(button)) { min-height: 0; }

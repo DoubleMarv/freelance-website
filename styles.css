@@ -3439,8 +3439,8 @@
 .hero-requests .hero-title {
     margin: 18px 0 12px;
     max-width: 20ch;
-    margin: 0 auto;
-    font-size: 60px;
+    margin: 0 auto !important;
+    font-size: 60px !important;
 }
 
 

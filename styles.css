@@ -4114,7 +4114,7 @@
 
 .hero-requests .hero-description {
   margin: 18px auto 24px;
-  font-size: 13px;
+  font-size: 19px;
   line-height: 1.7;
 }
 
@@ -4988,11 +4988,11 @@
     display: inline-grid;
     vertical-align: top;
     overflow: hidden;
+    font-weight: 600;
 }
 
 .need-item {
     grid-area: 1 / 1;
-    text-align: left;
 }
 
 /* No-JS fallback: show only the first phrase */

@@ -4967,3 +4967,51 @@
     opacity: 0;
   }
 }
+
+
+
+/********************/
+/*** ********** *****/
+/********************/
+
+
+/* ---- Hero "I need…" rotator ---- */
+.need-rotator {
+    display: inline-grid;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.need-item {
+    grid-area: 1 / 1;
+}
+
+/* No-JS fallback: show only the first phrase */
+.need-rotator:not(.is-ready) .need-item:not(:first-child) {
+    visibility: hidden;
+}
+
+.need-rotator.is-ready .need-item {
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+.need-rotator.is-ready .need-item.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.need-rotator.is-ready .need-item.is-leaving {
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .need-rotator.is-ready .need-item.is-active,
+    .need-rotator.is-ready .need-item.is-leaving {
+        transition: none;
+    }
+}
+/* ---- end rotator ---- */
